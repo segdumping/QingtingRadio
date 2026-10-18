@@ -13,6 +13,9 @@ using QingtingRadio.ViewModels;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 下载管理：后台传输的启动/暂停/取消/删除与下载列表的持久化。
+    /// </summary>
     public class FileDownloadHelper
     {
         private CancellationTokenSource cts;

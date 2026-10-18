@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,6 +9,9 @@ using QingtingRadio.Tools;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 分类/地区列表（增量加载），供分类页签展示。
+    /// </summary>
     public class RadioCategoryViewModel : ObservableCollection<Categories>
     {
         APIService _api = new APIService();

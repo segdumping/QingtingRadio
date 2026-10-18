@@ -21,6 +21,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 播放/暂停按钮控件，含缓冲指示圈。
+    /// </summary>
     public sealed partial class PlayControl : UserControl
     {
         private MediaPlayer Player = PlaybackService.Instance.Player;

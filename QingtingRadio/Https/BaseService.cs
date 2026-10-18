@@ -1,4 +1,4 @@
-﻿using QingtingRadio.Tools;
+using QingtingRadio.Tools;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -8,6 +8,9 @@ using Windows.Web.Http;
 
 namespace QingtingRadio.Https
 {
+    /// <summary>
+    /// HTTP 请求基类：带超时与统一 UA 的 GET/POST；失败记录原因与日志并返回 null。
+    /// </summary>
     static class BaseService
     {
         private static readonly HttpClient _httpClient = new HttpClient();

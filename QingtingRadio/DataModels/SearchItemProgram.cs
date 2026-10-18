@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +7,9 @@ using Windows.Data.Json;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 搜索结果条目（节目）：由搜索接口字段推算播放地址。
+    /// </summary>
     public class SearchItemProgram : AlbumItem
     {
         public string MediaId { get; set; }     

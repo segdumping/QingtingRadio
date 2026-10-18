@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Https;
 using QingtingRadio.Tools;
 using System;
@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 专辑节目列表（增量加载），并携带专辑详情。
+    /// </summary>
     public class RadioAlbumViewModel : ObservableCollection<AlbumItem>, ISupportIncrementalLoading
     {
         APIService _api = new APIService();
@@ -128,6 +131,9 @@ namespace QingtingRadio.ViewModels
         }
     }
 
+    /// <summary>
+    /// 值转换器：秒数转“时长：mm:ss”展示（超 1 小时含小时段）。
+    /// </summary>
     public class ConvertPlayDuration : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -145,6 +151,9 @@ namespace QingtingRadio.ViewModels
         }
     }
 
+    /// <summary>
+    /// 值转换器：更新时间截取日期部分（yyyy-MM-dd）。
+    /// </summary>
     public class ConvertAlbumUpdateTime : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -160,6 +169,9 @@ namespace QingtingRadio.ViewModels
         }
     }
 
+    /// <summary>
+    /// 值转换器：播放数加“播放：”前缀。
+    /// </summary>
     public class ConvertPlayCount : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

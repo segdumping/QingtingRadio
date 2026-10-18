@@ -1,4 +1,4 @@
-﻿using QingtingRadio.Https;
+using QingtingRadio.Https;
 using QingtingRadio.ViewModels;
 using System;
 using System.Diagnostics;
@@ -8,6 +8,9 @@ using Windows.Storage;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 版本更新提示：读取随包的版本日志并弹出更新通知。
+    /// </summary>
     public class VersionUpdateHelper
     {
         public async Task<string> VersionLog(bool getLog)

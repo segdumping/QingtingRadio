@@ -14,6 +14,9 @@ using Windows.ApplicationModel;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 应用级助手：前后台切换处理、设备信息、定时停播、网络检查等杂项。
+    /// </summary>
     public class AppHelper
     {
         private Timer _autoStopTimer;

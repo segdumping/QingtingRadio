@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 全屏播放页：大封面、进度与切曲控制。
+    /// </summary>
     public sealed partial class PlayPage : Page
     {
         private MediaPlayer Player => PlaybackService.Instance.Player;

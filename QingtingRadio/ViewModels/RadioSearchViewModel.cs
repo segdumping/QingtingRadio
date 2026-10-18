@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Https;
 using QingtingRadio.Tools;
 using System;
@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Data;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 搜索结果列表（增量加载）：按类型分页搜索电台/节目/专辑。
+    /// </summary>
     class RadioSearchViewModel : ObservableCollection<MusicItem>, ISupportIncrementalLoading, IDisposable
     {
         APIService _api = new APIService();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,9 @@ using QingtingRadio.Tools;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 电台回听节目条目：起止时间与日期，支持收藏持久化。
+    /// </summary>
     public class ReplayRadio : MusicItem
     {
         public string StartTime { get; set; }

@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Media;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 顶部轻提示浮层（Popup），显示指定时长后自动关闭。
+    /// </summary>
     public sealed partial class NotifyUser : UserControl
     {
         private Popup m_Popup;

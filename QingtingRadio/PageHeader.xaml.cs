@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 页面头部控件：标题内容 + 与汉堡按钮对齐的装饰线。
+    /// </summary>
     public sealed partial class PageHeader : UserControl
     {
         public PageHeader()
@@ -53,4 +56,3 @@ namespace QingtingRadio
             DependencyProperty.Register("HeaderContent", typeof(UIElement), typeof(PageHeader), new PropertyMetadata(DependencyProperty.UnsetValue));
     }
 }
-

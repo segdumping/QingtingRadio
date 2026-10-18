@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Https;
 using QingtingRadio.Tools;
 using System;
@@ -10,6 +10,9 @@ using Windows.UI.Xaml.Data;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 回听节目单（按日期页签加载）。
+    /// </summary>
     public class RadioReplayViewModel : ObservableCollection<ReplayRadio>
     {
         APIService _api = new APIService();
@@ -47,6 +50,9 @@ namespace QingtingRadio.ViewModels
         }
     }
 
+    /// <summary>
+    /// 值转换器：从回听条目的完整时间串中只取时段部分（HH:mm-HH:mm）。
+    /// </summary>
     public class CheckReplayItemState : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

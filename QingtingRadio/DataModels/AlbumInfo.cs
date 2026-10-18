@@ -9,6 +9,9 @@ using Windows.Media.Playback;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 专辑详情条目：简介、更新时间、节目数等信息。
+    /// </summary>
     public class AlbumInfo : MusicItem
     {
         public string Description { get; set; }

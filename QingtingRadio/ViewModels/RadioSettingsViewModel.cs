@@ -1,4 +1,4 @@
-﻿using QingtingRadio.Services;
+using QingtingRadio.Services;
 using QingtingRadio.Tools;
 using System;
 using System.ComponentModel;
@@ -10,6 +10,9 @@ using Windows.UI.ViewManagement;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 应用设置（LocalSettings 读写）：主题、清晰度、地区、定时停播等。
+    /// </summary>
     public class RadioSettingsViewModel : INotifyPropertyChanged
     {
         public bool  AppTheme

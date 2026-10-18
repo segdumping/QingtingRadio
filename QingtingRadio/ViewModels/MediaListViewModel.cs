@@ -16,6 +16,9 @@ using System.Threading;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 播放列表管理：分页加载、切曲、本地流释放、换台时代次作废。
+    /// </summary>
     public class MediaListViewModel : INotifyPropertyChanged
     {
         APIService _api = new APIService();

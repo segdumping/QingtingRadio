@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 节目单/回听助手：日期页签计算、星期映射、地区列表查询。
+    /// </summary>
     public class PlayInfoHelper
     {
         APIService _api = new APIService();

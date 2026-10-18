@@ -26,6 +26,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 设置页：主题/清晰度/地区/定时停播/缓存清理/反馈。
+    /// </summary>
     public sealed partial class SettingsPage : Page
     {
         private bool _isLoadingSettings = false;

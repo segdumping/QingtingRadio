@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +14,9 @@ using System.Diagnostics;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 电台列表（增量加载）：按分类/地区分页取电台并落图片缓存。
+    /// </summary>
     public class RadioListViewModel : ObservableCollection<RadioItem>, ISupportIncrementalLoading, IDisposable
     {
         APIService _api = new APIService();
@@ -184,6 +187,9 @@ namespace QingtingRadio.ViewModels
         }
     }
 
+    /// <summary>
+    /// 值转换器：听众数格式化，超 1 万折算为“x.x万”。
+    /// </summary>
     public class ConvertAudienceCount : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -208,6 +214,9 @@ namespace QingtingRadio.ViewModels
         }
     }
 
+    /// <summary>
+    /// 值转换器：正在播节目名加“正在直播：”前缀。
+    /// </summary>
     public class ConvertNowPlaying : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -222,6 +231,9 @@ namespace QingtingRadio.ViewModels
         }
     }
 
+    /// <summary>
+    /// 值转换器：直播时段加“直播时间：”前缀。
+    /// </summary>
     public class ConverPlayDuration : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -236,4 +248,3 @@ namespace QingtingRadio.ViewModels
         }
     }
 }
-

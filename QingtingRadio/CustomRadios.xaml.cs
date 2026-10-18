@@ -17,6 +17,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 自定义电台列表页：展示/播放/删除用户添加的电台。
+    /// </summary>
     public sealed partial class CustomRadios : Page
     {
         ObservableCollection<CustomRadio> items;
@@ -262,6 +265,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 去重比较器：按标题判断自定义电台是否相同。
+    /// </summary>
     class CustomCompare : IEqualityComparer<CustomRadio>
     {
         public bool Equals(CustomRadio x, CustomRadio y)

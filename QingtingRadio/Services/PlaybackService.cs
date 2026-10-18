@@ -6,6 +6,9 @@ using QingtingRadio.ViewModels;
 
 namespace QingtingRadio.Services
 {
+    /// <summary>
+    /// 全局唯一 MediaPlayer 的单例容器（后台播放与 SMTC 按钮接管）。
+    /// </summary>
     class PlaybackService
     {
         public MediaPlayer Player { get; private set; }

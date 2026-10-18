@@ -1,9 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Windows.Networking.Connectivity;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 网络状态检测：是否有连接、移动网络类型（2G/3G/4G）与 WiFi 判断。
+    /// </summary>
     class NetworkManager
     {
         public string NetworkTitle

@@ -9,6 +9,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 添加自定义电台的输入控件：校验标题与流地址后写入本地列表。
+    /// </summary>
     public sealed partial class CustomControl : UserControl
     {
         public CustomControl()

@@ -24,6 +24,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 专辑详情页：专辑信息与节目网格。
+    /// </summary>
     public sealed partial class AlbumPage : Page
     {
         RadioAlbumViewModel _album = new RadioAlbumViewModel();
@@ -252,6 +255,9 @@ namespace QingtingRadio
             RingCircle.IsActive = false;
         }
     }
+    /// <summary>
+    /// 命令：收藏专辑节目条目（自动补全专辑信息）。
+    /// </summary>
     internal class FavoriteAlbumItemCommand : ICommand
     {
         event EventHandler ICommand.CanExecuteChanged
@@ -278,6 +284,9 @@ namespace QingtingRadio
             await AppHelper.Current.SaveFavoriteProgram(item);
         }
     }
+    /// <summary>
+    /// 命令：下载专辑节目条目。
+    /// </summary>
     internal class DowanloadAlbumItemCommand : ICommand
     {
         event EventHandler ICommand.CanExecuteChanged

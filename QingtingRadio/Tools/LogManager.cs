@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +7,9 @@ using Windows.Storage.FileProperties;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 日志：写入本地单文件，超 2MB 滚动重建；自身异常静默，不向外抛出。
+    /// </summary>
     public class LogManager
     {
         // 用 SemaphoreSlim 而不是 Monitor：await 之后的续体可能换线程执行，

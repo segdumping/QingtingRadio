@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +10,9 @@ using QingtingRadio.Tools;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 上次播放快照/收听历史条目：含播放进度，提供统一的持久化读写。
+    /// </summary>
     public class LastestPlay  : MusicItem
     {
         public string AlbumId { get; set; }

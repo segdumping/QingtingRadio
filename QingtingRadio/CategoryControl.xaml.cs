@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 分类页控件：展示分类入口，点击进入对应电台列表（支持下拉刷新）。
+    /// </summary>
     public sealed partial class CategoryControl : UserControl
     {
         public CategoryControl()

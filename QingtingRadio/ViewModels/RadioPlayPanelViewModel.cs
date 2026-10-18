@@ -1,4 +1,4 @@
-﻿using QingtingRadio.Services;
+using QingtingRadio.Services;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Data;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 播放面板 UI 状态：标题/封面/缓冲指示/面板可见性。
+    /// </summary>
     public class RadioPlayPanelViewModel : INotifyPropertyChanged
     {
         private string imageuri;

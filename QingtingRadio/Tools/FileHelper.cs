@@ -13,8 +13,11 @@ using Windows.Storage.FileProperties;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 本地文件助手：JSON 读写、图片/音频缓存目录、文件名清洗、缓存清理。
+    /// </summary>
     public class FileHelper
-    {      
+    {
         public enum CacheType
         { 
             ImageCache = 0,

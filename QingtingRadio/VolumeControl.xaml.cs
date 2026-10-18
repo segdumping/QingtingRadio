@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 音量滑杆控件，音量为 0 自动静音、调高自动取消静音。
+    /// </summary>
     public sealed partial class VolumeControl : UserControl, INotifyPropertyChanged
     {
         private MediaPlayer Player => PlaybackService.Instance.Player;

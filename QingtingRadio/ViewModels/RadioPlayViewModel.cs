@@ -25,6 +25,9 @@ using Windows.Storage.FileProperties;
 
 namespace QingtingRadio.ViewModels
 {
+    /// <summary>
+    /// 播放核心：统一处理直播/回听/点播的播放入口、SMTC 元数据、收听历史与缓冲兜底。
+    /// </summary>
     class RadioPlayViewModel
     {
         private APIService _api = new APIService();

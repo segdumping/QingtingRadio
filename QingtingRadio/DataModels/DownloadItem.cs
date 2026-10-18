@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 下载任务条目：进度与文件信息，供下载列表绑定与持久化。
+    /// </summary>
     public class DownloadItem : MusicItem, INotifyPropertyChanged
     {
         private Int32 progress;

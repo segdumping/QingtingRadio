@@ -11,6 +11,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 收听历史页。
+    /// </summary>
     public sealed partial class HistoryPage : Page
     {
         private RadioSettingsViewModel _settings = RadioSettingsViewModel.Instance;

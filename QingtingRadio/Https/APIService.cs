@@ -15,6 +15,9 @@ using static QingtingRadio.Tools.PlayInfoHelper;
 
 namespace QingtingRadio.Https
 {
+    /// <summary>
+    /// 业务接口封装：分类/电台列表/搜索/回听节目单/图片下载等接口的调用与解析。
+    /// </summary>
     public class APIService : APIBaseService
     {      
         public async Task<List<Categories>> GetRadioCategories(string Uri)

@@ -26,6 +26,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 搜索页：搜索、历史与结果列表（按类型区分模板）。
+    /// </summary>
     public sealed partial class SearchPage : Page
     {
         RadioSettingsViewModel _settings = RadioSettingsViewModel.Instance;
@@ -397,6 +400,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 值转换器：搜索结果公共字段（时长/更新时间等）的展示格式化。
+    /// </summary>
     public class ConvertSearchCommonData : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -450,6 +456,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 命令：收藏搜索结果条目。
+    /// </summary>
     internal class SearchFavoriteCommand : ICommand
     {
         event EventHandler ICommand.CanExecuteChanged
@@ -472,6 +481,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 命令：下载搜索结果中的节目条目。
+    /// </summary>
     internal class SearchItemDownloadCommand : ICommand
     {
         event EventHandler ICommand.CanExecuteChanged

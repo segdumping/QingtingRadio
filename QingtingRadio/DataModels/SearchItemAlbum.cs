@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +7,9 @@ using Windows.Data.Json;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 搜索结果条目（专辑）。
+    /// </summary>
     public class SearchItemAlbum : AlbumInfo
     {    
         public SearchItemAlbum() { }

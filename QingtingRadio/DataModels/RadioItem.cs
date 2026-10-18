@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,6 +11,9 @@ using Windows.Media.Playback;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 直播电台条目：含正在播出的节目名与播出时段。
+    /// </summary>
     public class RadioItem : MusicItem
     {
         public string NowPlaying { get; set; }

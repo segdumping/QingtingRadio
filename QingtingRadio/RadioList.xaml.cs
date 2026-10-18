@@ -10,6 +10,9 @@ using Windows.Foundation.Metadata;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 电台列表页：从分类/地区入口进入的电台清单。
+    /// </summary>
     public sealed partial class RadioList : Page
     {
         private RadioListViewModel _list_ratios;

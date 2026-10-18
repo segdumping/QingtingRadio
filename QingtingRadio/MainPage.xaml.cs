@@ -22,6 +22,9 @@ using System.Linq;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 主框架页：SplitView 导航、内容子帧、主题定时切换与播放面板宿主。
+    /// </summary>
     public sealed partial class MainPage : Page
     {
         private DispatcherTimer themeTimer;

@@ -1,4 +1,4 @@
-﻿using QingtingRadio.Https;
+using QingtingRadio.Https;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,9 @@ using Windows.Media.Playback;
 
 namespace QingtingRadio.DataModels
 {
+    /// <summary>
+    /// 所有音频条目的基类：公共字段（Id/标题/封面/类型）与接口 JSON 解析工具方法，并计算节目播放地址（含签名）。
+    /// </summary>
     public class MusicItem
     {   
         public string Id { get; set; }

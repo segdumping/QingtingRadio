@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 下载列表页：展示/播放/删除已下载内容。
+    /// </summary>
     public sealed partial class DownloadLists : Page
     {
         public DownloadLists()
@@ -129,6 +132,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 值转换器：文件大小字节数转展示文本（暂停/失败/M）。
+    /// </summary>
     public class DownloadSizeValueConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -155,6 +161,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 命令：删除下载条目（含清理本地文件）。
+    /// </summary>
     internal class DeleteDownloadItemCommand : ICommand
     {
         event EventHandler ICommand.CanExecuteChanged

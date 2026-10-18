@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Https;
 using System;
 using System.Diagnostics;
@@ -8,6 +8,9 @@ using Windows.Storage;
 
 namespace QingtingRadio.Tools
 {
+    /// <summary>
+    /// 按 IP 定位用户所在地区，并映射到本地区域电台。
+    /// </summary>
     public class GetUserLocation
     {
         APIService _api = new APIService();

@@ -10,6 +10,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 应用入口：全局异常兜底、启动导航恢复、挂起时记录停留页面。
+    /// </summary>
     sealed partial class App : Application
     {
         public App()

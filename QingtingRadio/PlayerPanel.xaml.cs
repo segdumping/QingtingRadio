@@ -18,6 +18,9 @@ using QingtingRadio.ViewModels;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 底部迷你播放条：封面/标题/上一曲/播放/下一曲，含播放失败重播。
+    /// </summary>
     public sealed partial class PlayerPanel : UserControl
     {
         private MediaPlayer Player { get; }
@@ -313,6 +316,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 值转换器：秒数转进度条拖动提示文本（h:mm:ss 简写）。
+    /// </summary>
     class ThumbProgressConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

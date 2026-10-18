@@ -13,6 +13,9 @@ using System.Windows.Input;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 电台卡片控件：列表/网格条目，含封面缓存与均分布局。
+    /// </summary>
     public sealed partial class RadioControl : UserControl
     {
         private RadioListViewModel _radio_lists;
@@ -118,6 +121,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 命令：收藏电台卡片条目。
+    /// </summary>
     internal class FavoriteItemCommand : ICommand
     {
         event EventHandler ICommand.CanExecuteChanged

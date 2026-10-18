@@ -21,6 +21,9 @@ using Windows.UI.ViewManagement;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 首页：推荐/分类/国家台等页签。
+    /// </summary>
     public sealed partial class HomePage : Page
     {
         private RadioListViewModel _list_ratios;

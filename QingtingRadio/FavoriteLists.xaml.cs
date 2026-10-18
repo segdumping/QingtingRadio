@@ -22,6 +22,9 @@ using System.Windows.Input;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 回听收藏列表页。
+    /// </summary>
     public sealed partial class FavoriteLists : Page
     {
         static ObservableCollection<RadioItem> _FavoriteRadios;
@@ -298,6 +301,9 @@ namespace QingtingRadio
         }
     }
 
+    /// <summary>
+    /// 命令：删除收藏条目。
+    /// </summary>
     internal class DeleteFavoriteCommand : ICommand
     {
         event EventHandler ICommand.CanExecuteChanged

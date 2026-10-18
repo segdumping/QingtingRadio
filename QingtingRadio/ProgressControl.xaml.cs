@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Input;
 
 namespace QingtingRadio
 {
+    /// <summary>
+    /// 播放进度条控件：拖动 Seek、缓冲圈与直播标题刷新。
+    /// </summary>
     public sealed partial class ProgressControl : UserControl, INotifyPropertyChanged
     {
         private MediaPlayer Player = PlaybackService.Instance.Player;
