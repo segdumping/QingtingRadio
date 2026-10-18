@@ -44,19 +44,6 @@ git clone https://github.com/segdumping/QingtingRadio.git
 - 在 Visual Studio 中：*项目属性 › 打包 › 选择证书 › 创建测试证书*；
 - 或在本机的 `QingtingRadio.csproj.user` 文件（已被 git 忽略）中自行配置 `PackageCertificateKeyFile`。
 
-## 📦 私有 API 程序集说明
-
-蜻蜓 FM 的接口地址与请求签名算法（含密钥）**未随源码公开**，统一封装在预编译程序集中：
-
-```
-libs/QingtingRadio.Core.dll
-```
-
-- 命名空间：`QingtingRadio.Https`
-- 对外类型：`ServiceURLs`（接口地址模板）、`ApiSigner`（请求签名）
-- 主项目 `QingtingRadio/QingtingRadio.csproj` 已引用它，克隆后开箱即可编译
-- 如需新增或修改接口：用相同命名空间重新编译一份 `QingtingRadio.Core.dll`，覆盖 `libs/` 下的同名文件即可，无需改动主工程
-
 ## 📁 项目结构
 
 ```
@@ -73,7 +60,7 @@ QingtingRadio/
 ├── App.xaml(.cs)        # 应用入口：异常兜底、启动恢复、挂起处理
 └── Package.appxmanifest # 应用清单
 libs/
-└── QingtingRadio.Core.dll   # 私有 API 程序集（见上节）
+└── QingtingRadio.Core.dll   # 预编译程序集，主项目已引用
 ```
 
 ## ⚠️ 免责声明
