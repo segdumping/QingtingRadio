@@ -1,0 +1,157 @@
+﻿<Page
+    x:Class="QingtingRadio.DownloadLists"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:QingtingRadio"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xaml="using:Windows.UI.Xaml"
+    xmlns:data="using:QingtingRadio.DataModels"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:xaml1="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    x:Name="Control"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <local:DownloadSizeValueConverter x:Key="downloadSizeValueConverter"></local:DownloadSizeValueConverter>
+        <local:DeleteDownloadItemCommand x:Key="deleteDownloadItemCommand" />
+    </UserControl.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          SizeChanged="Grid_SizeChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <local:PageHeader VerticalAlignment="Center">
+            <local:PageHeader.HeaderContent>
+                <TextBlock Name="TitleName" Text="下载" VerticalAlignment="Center" Margin="0,0,0,2" FontSize="16"/>
+            </local:PageHeader.HeaderContent>
+        </local:PageHeader>
+        <Border x:Name="width" Visibility="Collapsed"/>
+        <ListView Name="DowanloadListsView"                  
+                  CanReorderItems="False"
+                  CanDragItems="False"   
+                  Grid.Row="1"
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  ItemsSource="{Binding}"
+                  Style="{StaticResource RadioItemListStyle}"
+                  ItemContainerStyle="{StaticResource CardItemStyle}"
+                  ItemClick="DowanloadListsView_ItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:DownloadItem">
+                    <controls:SlidableListItem                         
+                              DataContext="{Binding ElementName=Control, Path=DataContext, Mode=OneWay}"
+                              HorizontalAlignment="Stretch"
+                              ActivationWidth="64"                       
+                              IsLeftCommandEnabled="True"
+                              IsOffsetLimited="True"                             
+                              IsPointerReleasedOnSwipingHandled="True"
+                              LeftBackground="OrangeRed"          
+                              LeftForeground ="White"
+                              LeftCommand="{StaticResource deleteDownloadItemCommand}"
+                              LeftCommandParameter="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
+                              LeftIcon="Delete"
+                              LeftLabel="删除"
+                              IsRightCommandEnabled="false"
+                              RightCommandParameter="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
+                              MouseSlidingEnabled="False">
+                        <Grid Margin="0"
+                              Width="{Binding ElementName=width,Path=Width}"
+                              PointerEntered="Grid_PointerEntered"
+                              PointerExited="Grid_PointerExited"
+                              Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" >
+                                <Grid Height="68" Width="72">
+                                    <!--<Ellipse Stroke="{ThemeResource SystemAccentColorLight2}" 
+                                             Height="68" 
+                                             Width="72" 
+                                             StrokeThickness="2">
+                                    </Ellipse>-->
+                                    <controls:RadialProgressBar
+                                            x:Name="RadialProgressBarControl"
+                                            Value="{Binding DataContext.Progress,RelativeSource={RelativeSource TemplatedParent}}"
+                                            Foreground="{ThemeResource SystemAccentColor}"
+                                            Thickness="2"
+                                            Minimum="0"
+                                            Maximum="100"
+                                            Width="72"
+                                            Height="68"
+                                            Outline="LightGray"/>
+                                    <TextBlock Foreground="Red" 
+                                           FontSize="18"  
+                                           Text="{Binding DataContext.FileSize,RelativeSource={RelativeSource TemplatedParent},Converter={StaticResource downloadSizeValueConverter}}" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center">
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="12,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{x:Bind Title}" 
+                                                FontSize="13"                                                  
+                                                MaxLines="1"
+                                                Margin="0,0,4,0"
+                                                Grid.Row="0"
+                                                TextTrimming="WordEllipsis">
+                                        </TextBlock>
+                                        <TextBlock Text="{x:Bind AlbumName}" 
+                                                VerticalAlignment="Center" 
+                                                FontSize="13" 
+                                                Margin="0,4,4,0" 
+                                                TextTrimming="WordEllipsis" 
+                                                MaxLines="1"
+                                                Grid.Row="1"
+                                                Foreground="#FF61A3AE">
+                                        </TextBlock>
+                                    </Grid>
+                                    <Button Name="Delete"
+                                            Grid.Column="1"
+                                            Content="&#xE107;" 
+                                            FontFamily="Segoe MDL2 Assets" 
+                                            Background="Transparent" 
+                                            VerticalAlignment="Top"
+                                            Visibility="Collapsed"
+                                            RelativePanel.AlignRightWithPanel="True"
+                                            Click="DeleteDowanloadFile_Click" 
+                                            DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}">
+                                    </Button>
+                                </Grid>
+                                <RelativePanel Grid.Row="1" Margin="0,1">
+                                    <TextBlock Text="{x:Bind AudioTime}" 
+                                            VerticalAlignment="Center" 
+                                            FontSize="13" 
+                                            Margin="0,4,4,0" 
+                                            Foreground="#FFDE8E8E"/>
+                                </RelativePanel>
+                            </Grid>
+                        </Grid>
+                    </controls:SlidableListItem>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ProgressRing Name="RingCircle" TabIndex="100" Height="60" Width="60" Grid.RowSpan="2"
+                      Foreground="{ThemeResource SystemAccentColor}">
+        </ProgressRing>
+    </Grid>
+</Page>

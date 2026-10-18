@@ -1,0 +1,28 @@
+﻿<Application
+    x:Class="QingtingRadio.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:QingtingRadio"
+    RequestedTheme="Light">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default" >
+                    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#FF1D1D1D"/>
+                    <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="#FFB1B1B1"/>
+                    <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="#FF1D1D1D"/>
+                    <SolidColorBrush x:Key="ComboBoxBackground" Color="#FF1D1D1D"/>
+                </ResourceDictionary> 
+                <ResourceDictionary x:Key="Light" >
+                    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="#FFFFFFFF"/>
+                    <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="#FF4D4D4D"/>
+                    <SolidColorBrush x:Key="ComboBoxForeground" Color="#FF4D4D4D"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

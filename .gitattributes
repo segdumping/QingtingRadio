@@ -1,0 +1,24 @@
+# Normalize line endings: LF in repo, native on checkout
+* text=auto
+
+# Source files
+*.cs text diff=csharp
+*.xaml text
+*.json text
+*.md text
+*.sln text eol=crlf
+*.csproj text eol=crlf
+*.appxmanifest text eol=crlf
+*.rd.xml text
+*.gitattributes text
+*.gitignore text
+LICENSE text
+
+# Binaries — never touch
+*.dll binary
+*.png binary
+*.jpg binary
+*.exe binary
+*.appx binary
+*.appxsym binary
+*.suo binary

@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="QingtingRadio.PlayPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:QingtingRadio"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Name="PlayGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
+        <local:PageHeader VerticalAlignment="Center">
+            <local:PageHeader.HeaderContent>
+                <TextBlock Name="TitleName" VerticalAlignment="Center" Margin="0,0,0,2" FontSize="16"/>
+            </local:PageHeader.HeaderContent>
+        </local:PageHeader>
+        <Grid Grid.Row="1">
+            <!--<Image  x:Name="Thumb"  
+                    Height="200" 
+                    Width="200" 
+                    Margin="0,36,0,96"
+                    HorizontalAlignment="Center">
+            </Image>-->
+            <Ellipse x:Name="ellipse" Width="280" Height="280" RenderTransformOrigin="0.5,0.5" StrokeThickness="1" Stroke="LightGray" Margin="0,0,0,16">
+                <Ellipse.RenderTransform>
+                    <CompositeTransform/>
+                </Ellipse.RenderTransform>
+                <Ellipse.Resources>
+                    <Storyboard x:Name="EllStoryboard" RepeatBehavior="Forever">
+                        <DoubleAnimation Duration="0:0:20" To="360" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="ellipse" d:IsOptimized="True"/>
+                    </Storyboard>
+                </Ellipse.Resources>
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="Thumb"></ImageBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <local:ProgressControl x:Name="Progress" Grid.Column="1" Margin="2,0" VerticalAlignment="Center"></local:ProgressControl>
+            <TextBlock  Name="currentPosition" Text="{Binding ElementName=Progress,Path=Position,TargetNullValue=00:00}" Grid.Column="0" Margin="16,0,0,0" FontSize="12" VerticalAlignment="Center"/>
+            <TextBlock  Name="totalTime" Text="{Binding ElementName=Progress,Path=Duration,TargetNullValue=00:00}"  Grid.Column="2" Margin="0,0,16,0" FontSize="12" VerticalAlignment="Center"/> 
+        </Grid>
+        <Grid Grid.Row="3" Margin="0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="Volume"
+                        Height="36"  
+                        Background="Transparent"
+                        Content="&#xE767;" 
+                        FontFamily="Segoe MDL2 Assets" 
+                        FontSize="16" 
+                        Margin="8,0"     
+                        Grid.Column="0"
+                        Style="{StaticResource CustomButtonStyle}">
+                <Button.Flyout>
+                    <Flyout>
+                        <local:VolumeControl x:Name="VolumeValue"></local:VolumeControl>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <local:PlayControl Grid.Column="1" Width="192"></local:PlayControl>
+            <StackPanel Grid.Column="2" 
+                    VerticalAlignment="Center">
+                <Button x:Name="MediaListControl"
+                    Height="36"
+                    Content="&#xE14C;" 
+                    FontFamily="Segoe MDL2 Assets" 
+                    FontSize="16"
+                    Click="Replay_Click"
+                    Margin="16,0,8,0"
+                    ToolTipService.ToolTip="回听列表"
+                    Background="Transparent"
+                    Style="{StaticResource CustomButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

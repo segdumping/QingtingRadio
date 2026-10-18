@@ -1,0 +1,314 @@
+﻿<Page
+    x:Class="QingtingRadio.ReplayPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:QingtingRadio"
+    xmlns:data="using:QingtingRadio.DataModels"
+    xmlns:vm="using:QingtingRadio.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="800">
+
+    <Page.Resources>
+        <vm:CheckReplayItemState x:Key="checkReplayItemState"/>
+        <local:AlbumItemDurationConverter x:Key="albumItemDurationConverter"/>
+        <local:ReplayTitleConverter x:Key="replayTitleConverter"/>
+        <!-- 行内按钮的悬停/按下背景：用强调色半透明，深浅主题下都清晰可见 -->
+        <SolidColorBrush x:Key="RowButtonHoverBrush" Color="{StaticResource SystemAccentColor}" Opacity="0.25"/>
+        <SolidColorBrush x:Key="RowButtonPressedBrush" Color="{StaticResource SystemAccentColor}" Opacity="0.5"/>
+        <!-- 行悬停高亮：与按钮/卡片同一强调色系（仅行容器，不影响行内按钮的悬停） -->
+        <SolidColorBrush x:Key="RowHoverBackground" Color="{StaticResource SystemAccentColor}" Opacity="0.08"/>
+        <SolidColorBrush x:Key="RowPressedBackground" Color="{StaticResource SystemAccentColor}" Opacity="0.16"/>
+        <!-- 行容器：悬停淡色高亮、按下加深 -->
+        <Style x:Key="PlainRowItemStyle" TargetType="ListViewItem">
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border x:Name="RowRoot" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RowRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RowHoverBackground}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RowRoot">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RowPressedBackground}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- 行内按钮：悬停/按下有背景反馈（全局 CustomButtonStyle 是全透明的，无反馈） -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RowButtonHoverBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource RowButtonPressedBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <local:PageHeader Grid.Row="0" VerticalAlignment="Center">
+            <local:PageHeader.HeaderContent>
+                <Grid>
+                    <TextBlock Name="TitleName" Text="回听节目" VerticalAlignment="Center" Margin="0,0,0,2" FontSize="16"/>
+                </Grid>
+            </local:PageHeader.HeaderContent>
+        </local:PageHeader>
+
+        <!-- 回听模式：日期页签 -->
+        <StackPanel Name="DayTabs"
+                    Grid.Row="1"
+                    Orientation="Horizontal"
+                    Margin="16,8,16,4">
+            <Button Name="DayBefore"
+                    Content="前天"
+                    MinWidth="72"
+                    Margin="0,0,12,0"
+                    Click="DayBefore_Click"
+                    Background="Transparent"/>
+            <Button Name="YesToday"
+                    Content="昨天"
+                    MinWidth="72"
+                    Margin="0,0,12,0"
+                    Click="YesToday_Click"
+                    Background="Transparent"/>
+            <Button Name="Today"
+                    Content="今天"
+                    MinWidth="72"
+                    Click="Today_Click"
+                    Background="Transparent"/>
+        </StackPanel>
+
+        <!-- 专辑模式：专辑名 -->
+        <TextBlock Name="AlbumTitle"
+                   Grid.Row="1"
+                   Foreground="{ThemeResource SystemAccentColor}"
+                   FontSize="18"
+                   Margin="16,8,16,4"
+                   Visibility="Collapsed"/>
+
+        <!-- 回听模式：电台节目单 -->
+        <ListView Name="ReplayListView"
+                  Grid.Row="2"
+                  Margin="8,0,8,8"
+                  CanReorderItems="False"
+                  CanDragItems="False"
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  ItemContainerStyle="{StaticResource PlainRowItemStyle}"
+                  ItemClick="ReplayListView_ItemClick"
+                  ItemsSource="{Binding}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:ReplayRadio">
+                    <Grid Background="Transparent"
+                          Height="48">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 左侧：节目名（固定宽度列，保证时间列位置一致） -->
+                        <TextBlock Text="{x:Bind Title, Converter={StaticResource replayTitleConverter}}"
+                                   VerticalAlignment="Center"
+                                   Margin="8,0,0,0"
+                                   FontSize="16"
+                                   TextTrimming="CharacterEllipsis"/>
+
+                        <!-- 时间：固定列，各行上下对齐 -->
+                        <TextBlock Grid.Column="1"
+                                   Margin="0,0,16,0"
+                                   Text="{x:Bind DateTime, Converter={StaticResource checkReplayItemState}}"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+
+                        <!-- 右侧：回听 / 下载 / 收藏 -->
+                        <Button Name="PlayReplay"
+                                Grid.Column="3"
+                                Content="回听"
+                                MinWidth="64"
+                                MinHeight="32"
+                                Margin="8,0"
+                                VerticalAlignment="Center"
+                                Click="PlayReplay_Click"
+                                Style="{StaticResource ActionButtonStyle}"/>
+                        <Button Name="Download"
+                                Grid.Column="4"
+                                Content="下载"
+                                MinWidth="64"
+                                MinHeight="32"
+                                Margin="8,0"
+                                VerticalAlignment="Center"
+                                Click="Download_Click"
+                                Style="{StaticResource ActionButtonStyle}"/>
+                        <Button Name="Favorite"
+                                Grid.Column="5"
+                                Content="收藏"
+                                MinWidth="64"
+                                MinHeight="32"
+                                Margin="8,0,4,0"
+                                VerticalAlignment="Center"
+                                Click="Favorite_Click"
+                                Style="{StaticResource ActionButtonStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- 专辑模式：节目列表 -->
+        <ListView Name="AlbumListView"
+                  Grid.Row="2"
+                  Margin="8,0,8,8"
+                  CanReorderItems="False"
+                  CanDragItems="False"
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  ItemContainerStyle="{StaticResource PlainRowItemStyle}"
+                  ItemClick="AlbumListView_ItemClick"
+                  ItemsSource="{Binding}"
+                  Visibility="Collapsed">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:AlbumItem">
+                    <Grid Background="Transparent"
+                          Height="48">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 左侧：节目名（固定宽度列，保证时长列位置一致） -->
+                        <TextBlock Text="{x:Bind Title, Converter={StaticResource replayTitleConverter}}"
+                                   VerticalAlignment="Center"
+                                   Margin="8,0,0,0"
+                                   FontSize="16"
+                                   TextTrimming="CharacterEllipsis"/>
+
+                        <!-- 时长：固定列，各行上下对齐 -->
+                        <TextBlock Grid.Column="1"
+                                   Margin="0,0,16,0"
+                                   Text="{x:Bind Duration, Converter={StaticResource albumItemDurationConverter}}"
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"/>
+
+                        <!-- 右侧：播放 / 下载 / 收藏 -->
+                        <Button Name="Play"
+                                Grid.Column="3"
+                                Content="播放"
+                                MinWidth="64"
+                                MinHeight="32"
+                                Margin="8,0"
+                                VerticalAlignment="Center"
+                                Click="AlbumPlay_Click"
+                                Style="{StaticResource ActionButtonStyle}"/>
+                        <Button Name="Download"
+                                Grid.Column="4"
+                                Content="下载"
+                                MinWidth="64"
+                                MinHeight="32"
+                                Margin="8,0"
+                                VerticalAlignment="Center"
+                                Click="AlbumDownload_Click"
+                                Style="{StaticResource ActionButtonStyle}"/>
+                        <Button Name="Favorite"
+                                Grid.Column="5"
+                                Content="收藏"
+                                MinWidth="64"
+                                MinHeight="32"
+                                Margin="8,0,4,0"
+                                VerticalAlignment="Center"
+                                Click="AlbumFavorite_Click"
+                                Style="{StaticResource ActionButtonStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ProgressRing Name="RingCircle"
+                      Grid.Row="2"
+                      Height="48"
+                      Width="48"
+                      Foreground="{ThemeResource SystemAccentColor}"/>
+    </Grid>
+</Page>

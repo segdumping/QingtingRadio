@@ -1,0 +1,29 @@
+# Visual Studio / build output
+.vs/
+bin/
+obj/
+AppPackages/
+*.appx
+*.appxbundle
+*.appxsym
+*.appxupload
+
+# Certificates & publishing profiles (never commit signing material)
+*.pfx
+*.cer
+*.snk
+*.pubxml
+*.pubxml.user
+TestCert/
+
+# User-specific files
+*.user
+*.suo
+*.cache
+*.bak
+*.tmp
+*.log
+
+# Private API metadata project (kept outside this repository).
+# Only the compiled assembly under libs/ is published.
+QingtingRadio.Core/
