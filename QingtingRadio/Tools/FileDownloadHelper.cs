@@ -123,7 +123,7 @@ namespace QingtingRadio.Tools
                 return;
             }
 
-            // 兜底清洗文件名：调用方可能带入 Windows 不允许的字符，CreateFileAsync 会直接抛异常
+            // 兜底清洗文件名
             downloadItem.FileName = FileHelper.SanitizeFileName(downloadItem.FileName);
             if (string.IsNullOrEmpty(downloadItem.FileName))
             {
