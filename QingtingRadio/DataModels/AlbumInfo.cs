@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -16,7 +16,6 @@ namespace QingtingRadio.DataModels
         public string SaleType { get; set; }
         public string PragromCount { get; set; }
         public string Version { get; set; }
-
 
         public AlbumInfo() { }
 

@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using System;
 using System.Text;
 using QingtingRadio.Https;
@@ -89,11 +89,6 @@ namespace QingtingRadio.ViewModels
         {
             if (!await UpdatePlayPanel(item, true)) return;
 
-            {
-                //item.PlayUri = string.Format(ServiceURLs.ReplyRadio, item.ID, RadioSettingsViewModel.Instance.Bitrate, RadioSettingsViewModel.Instance.DeviceId, item.PlayUri);
-                //item.PlayUri = string.Format(ServiceURLs.NewReply, item.PlayUri, RadioSettingsViewModel.Instance.DeviceId);
-            }
-
             await NewPlayItem(item);
         }
 
@@ -173,7 +168,6 @@ namespace QingtingRadio.ViewModels
                 item.ImageUri, item.FilePath, MusicItem.AudioType.Program);
         }
 
-
         public async Task PlayAlbumItem(AlbumItem item, string albumId)
         {
             await PlayProgramCoreAsync(item.Id, albumId, item.AlbumName, item.Title,
@@ -250,7 +244,6 @@ namespace QingtingRadio.ViewModels
                 bool isAlbumItem = await _mediaList.IsPlayListItem(item.Id, item.AlbumId);
                 if (isAlbumItem)
                 {
-                    //    await _mediaList.CheckMediaPlaybackList(item.ID, playType, item.AlbumId);
                     // 条目已在列表里，IsPlayListItem 内部已切曲开始播放：必须复位缓冲指示，
                     // 否则 UpdatePlayPanel 刚置上的 IsBuffering=true 会一直留着（界面持续转圈）。
                     PlayPanel.IsBuffering = false;
@@ -263,7 +256,6 @@ namespace QingtingRadio.ViewModels
                         _mediaList.ClearPlaybackList();
                     }
                 }
-
 
                 bool isFileExist = await FileHelper.Current.CacheExist(item.FileName, FileHelper.CacheType.AudioCache);
                 if (!isFileExist)
@@ -377,7 +369,6 @@ namespace QingtingRadio.ViewModels
                 PlayPanel.IsBuffering = false;
             }
         }
-
 
         public async Task UpdatePlayPosition(string itemId)
         {

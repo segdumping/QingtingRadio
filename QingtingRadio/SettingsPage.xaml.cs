@@ -1,4 +1,4 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Extensions;
+using Microsoft.Toolkit.Uwp.UI.Extensions;
 using QingtingRadio.DataModels;
 using QingtingRadio.Tools;
 using QingtingRadio.ViewModels;
@@ -23,8 +23,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {
@@ -69,8 +67,6 @@ namespace QingtingRadio
 
                 int index = list.FindIndex(v => v.ID == RadioSettingsViewModel.Instance.UserRegionID);
                 Region.SelectedIndex = index < 0 ? 0 : index;
-
-               // Region.PlaceholderText = RadioSettingsViewModel.Instance.UserRegionName;
             }
         }
 

@@ -26,7 +26,6 @@ namespace QingtingRadio.DataModels
             string startTime = GetJsonString(tmpObject, "start_time");
             string duration = GetJsonNumber(tmpObject, "duration");
 
-            //转换时间格式
             if (!string.IsNullOrEmpty(startTime) && !string.IsNullOrEmpty(duration))
             {
                 var date = DateTime.Parse(startTime);

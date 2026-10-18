@@ -1,4 +1,4 @@
-﻿using QingtingRadio.Tools;
+using QingtingRadio.Tools;
 using System;
 using System.Diagnostics;
 using Windows.ApplicationModel;
@@ -8,12 +8,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-
 namespace QingtingRadio
 {
-    /// <summary>
-    /// 提供特定于应用程序的行为，以补充默认的应用程序类。
-    /// </summary>
     sealed partial class App : Application
     {
         public App()
@@ -36,21 +32,13 @@ namespace QingtingRadio
             e.Handled = true;
         }
 
-        /// <summary>
-        /// 在应用程序由最终用户正常启动时进行调用。
-        /// 将在启动应用程序以打开特定文件等情况下使用。
-        /// </summary>
-        /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
             Frame rootFrame = Window.Current.Content as Frame;
 
-            // 不要在窗口已包含内容时重复应用程序初始化，
-            // 只需确保窗口处于活动状态
             if (rootFrame == null)
             {
-                // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
@@ -64,7 +52,6 @@ namespace QingtingRadio
 
                 _ = AppHelper.RegisterToast();
 
-                // 将框架放在当前窗口中
                 Window.Current.Content = rootFrame;
 
                 if (string.IsNullOrEmpty(lastPage))
@@ -76,42 +63,25 @@ namespace QingtingRadio
                     // 参数带上要恢复的页面类型名，由 MainPage 完成实际导航
                     rootFrame.Navigate(typeof(MainPage), lastPage);
                 }
-                //    确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
             else if (e.PrelaunchActivated == false)
             {
                 if (rootFrame.Content == null)
                 {
-                    // 当导航堆栈尚未还原时，导航到第一页，
-                    // 并通过将所需信息作为导航参数传入来配置
-                    // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
-                // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
 
         }
 
-        /// <summary>
-        /// 导航到特定页失败时调用
-        /// </summary>
-        ///<param name="sender">导航失败的框架</param>
-        ///<param name="e">导航失败的详细信息</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             // 记录后保持运行，不再抛异常杀掉进程
             LogManager.LogAsync("navigation failed to " + e.SourcePageType, e.Exception);
         }
 
-        /// <summary>
-        /// 在将要挂起应用程序执行时调用。  在不知道应用程序
-        /// 无需知道应用程序会被终止还是会恢复，
-        /// 并让内存内容保持不变。
-        /// </summary>
-        /// <param name="sender">挂起的请求的源。</param>
-        /// <param name="e">有关挂起的详细信息。</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             Debug.WriteLine("app onsuspending............");

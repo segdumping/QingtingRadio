@@ -27,7 +27,6 @@ namespace QingtingRadio.ViewModels
         private int _current_page = 1;
         public int TotalCount { get; set; }
 
-        //public enum _search_type { remix, channel_ondemand, channel_live, program_ondemand};
         public enum _search_type { remix, channel_live, program_ondemand, channel_ondemand };
 
         public bool HasMoreItems
@@ -69,7 +68,6 @@ namespace QingtingRadio.ViewModels
         public RadioSearchViewModel()
         {
             Init();
-        //    CollectionChanged += RadioSearchViewModel_CollectionChanged;
         }
 
         private void RadioSearchViewModel_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -82,19 +80,6 @@ namespace QingtingRadio.ViewModels
             {
                 tmp.ImageUri = "ms-appx:///Assets/recommend_defaultbg.png";
             }
-            //else
-            //{
-            //    string[] sArray = tmp.ImageUri.Split('/');
-            //    string ImageId = sArray[sArray.Length - 1].Split('!')[0];
-            //    if (await FileHelper.Current.CacheExist(ImageId, FileHelper.CacheType.ImageCache))
-            //    {
-            //        tmp.ImageUri = _local_path + "\\ImagesCache\\" + ImageId;
-            //    }
-            //    else
-            //    {
-            //        await _api.DownloadImage(tmp.ImageUri);
-            //    }
-            //}
         }
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)

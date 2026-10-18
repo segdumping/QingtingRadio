@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Services;
 using QingtingRadio.Tools;
 using QingtingRadio.ViewModels;
@@ -12,8 +12,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {
@@ -31,7 +29,6 @@ namespace QingtingRadio
             this.Unloaded += PlayPage_Unloaded;
 
             this.DataContext = PlayingPanel;
-          //  Volume.Volume = Settigns.Volume;
         }
 
         private void PlayPage_Unloaded(object sender, RoutedEventArgs e)

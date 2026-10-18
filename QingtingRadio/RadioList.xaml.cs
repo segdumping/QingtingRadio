@@ -1,4 +1,4 @@
-﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls;
 using QingtingRadio.ViewModels;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Navigation;
@@ -7,9 +7,6 @@ using QingtingRadio.DataModels;
 using Windows.System.Profile;
 using QingtingRadio.Tools;
 using Windows.Foundation.Metadata;
-
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {

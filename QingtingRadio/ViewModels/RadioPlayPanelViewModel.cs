@@ -101,11 +101,8 @@ namespace QingtingRadio.ViewModels
             get { return isbuffering; }
             set
             {
-            //    if (isbuffering != value)
-                {
-                    isbuffering = value;
-                    RaisePropertyChanged("IsBuffering");
-                }
+                isbuffering = value;
+                RaisePropertyChanged("IsBuffering");
             }
         }
 

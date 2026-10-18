@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,8 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {
@@ -51,7 +49,6 @@ namespace QingtingRadio
             set { SetValue(HeaderContentProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for HeaderContent.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty HeaderContentProperty =
             DependencyProperty.Register("HeaderContent", typeof(UIElement), typeof(PageHeader), new PropertyMetadata(DependencyProperty.UnsetValue));
     }

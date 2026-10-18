@@ -25,8 +25,6 @@ namespace QingtingRadio.ViewModels
                 this.Clear();
 
                 var currentDay = PlayInfoHelper.Current.GetCurrentDay(ValueType);
-                //    LastestPlay item = await FileHelper.Current.ReadObjectAsync<LastestPlay>("LastestPlayRadio.json");
-
                 string itemId = MediaListViewModel.Instance.CurrentMediaId;
                 if (!string.IsNullOrEmpty(itemId))
                 {

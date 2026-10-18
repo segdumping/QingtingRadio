@@ -98,11 +98,9 @@ namespace QingtingRadio.Tools
                 WwanDataClass connectionClass = profile.WwanConnectionProfileDetails.GetCurrentDataClass();
                 switch (connectionClass)
                 {
-                    //2G-equivalent
                     case WwanDataClass.Edge:
                     case WwanDataClass.Gprs:
                         return 0;
-                    //3G-equivalent
                     case WwanDataClass.Cdma1xEvdo:
                     case WwanDataClass.Cdma1xEvdoRevA:
                     case WwanDataClass.Cdma1xEvdoRevB:
@@ -114,15 +112,12 @@ namespace QingtingRadio.Tools
                     case WwanDataClass.Hsdpa:
                     case WwanDataClass.Hsupa:
                         return 1;
-                    //4G-equivalent
                     case WwanDataClass.LteAdvanced:
                         return 2;
 
-                    //not connected
                     case WwanDataClass.None:
                         return 4;
 
-                    //unknown
                     case WwanDataClass.Custom:
                     default:
                         return 4;

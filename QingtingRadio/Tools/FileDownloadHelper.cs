@@ -170,7 +170,6 @@ namespace QingtingRadio.Tools
                     if (index < 0)
                     {
                         downloadItem.FilePath = download.ResultFile.Path;
-                     //   double ratio = RadioSettingsViewModel.Instance.IsHighBitrate ? 7908.026546 : 3004.381389;
                         downloadItem.ID = download.Guid;
                         downloadFiles.Insert(0, downloadItem);
                         files.Add(downloadItem);
@@ -293,7 +292,6 @@ namespace QingtingRadio.Tools
         {
             try
             {
-                //从内存缓存中删除
                 string filename = null;
                 {
                     int index = activeDownloads.FindIndex(v1 => v1.Guid == file.ID);
@@ -344,7 +342,6 @@ namespace QingtingRadio.Tools
                     
                 }
 
-                //删除文件
                 StorageFolder radioFolder = await FileHelper.GetAudioCacheFolderAsync();
                 if (radioFolder == null)
                 {
@@ -429,8 +426,6 @@ namespace QingtingRadio.Tools
                 
                 if (percent >= 100)
                 {
-
-                    //    downloadFiles[index].Progress = Math.Round(Convert.ToDouble(currentProgress.TotalBytesToReceive) / 1024 /1024, 2, MidpointRounding.ToEven).ToString() + "M";
                     downloadFiles[index].Progress = 100;
                     downloadFiles[index].IsSuccess = true;
                     downloadFiles[index].FileSize = currentProgress.TotalBytesToReceive;
@@ -443,7 +438,6 @@ namespace QingtingRadio.Tools
                     downloadFiles[index].FileSize = currentProgress.BytesReceived;
                     if (currentProgress.Status == BackgroundTransferStatus.PausedByApplication)
                     {
-                        //   downloadFiles[index].FileSize = "暂停";
                         downloadFiles[index].FileSize = -1;
                         forceSave = true;
                     }

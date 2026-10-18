@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using QingtingRadio.ViewModels;
@@ -20,13 +20,8 @@ using Windows.Graphics.Display;
 using System.Diagnostics;
 using System.Linq;
 
-//“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
-
 namespace QingtingRadio
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         private DispatcherTimer themeTimer;
@@ -150,7 +145,6 @@ namespace QingtingRadio
             }
         }
 
-
         public static MainPage Current = null;
         public Frame ContentFrame { get { return SubFrame; } }
 
@@ -166,7 +160,6 @@ namespace QingtingRadio
         {
             TogglePaneButton.IsChecked = true;
         }
-
 
         private void RootSplitView_PaneClosed(SplitView sender, object args)
         {
@@ -209,15 +202,12 @@ namespace QingtingRadio
             }
         }
 
-
-
         private async void CustomTitleBar()
         {
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
                 {
-                 //   ApplicationView.GetForCurrentView().SetDesiredBoundsMode( ApplicationViewBoundsMode.UseCoreWindow);
                     StatusBar statusBar = StatusBar.GetForCurrentView();
                     statusBar.BackgroundOpacity = 1;
                     if (this.Frame.RequestedTheme == ElementTheme.Light)
@@ -310,11 +300,7 @@ namespace QingtingRadio
 
         public void SinglePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName.Equals("IsLoading"))
-            {
-                //ring.IsActive = (sender as RadioSingleProperty).IsLoading;
-            }
-            else if (e.PropertyName.Equals("PanelVisibility"))
+            if (e.PropertyName.Equals("PanelVisibility"))
             {
                 PlayerPanelControl.Visibility = (sender as RadioSingleProperty).PanelVisibility;
             }
@@ -338,7 +324,6 @@ namespace QingtingRadio
 
             }
         }
-
 
         private void AutoSwitchThemeTimer()
         {

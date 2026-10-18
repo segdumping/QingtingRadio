@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Tools;
 using QingtingRadio.ViewModels;
 using System;
@@ -8,8 +8,6 @@ using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {
@@ -31,12 +29,10 @@ namespace QingtingRadio
             _settings_PropertyChanged(null, new PropertyChangedEventArgs("AppTheme"));
             _settings.PropertyChanged += _settings_PropertyChanged;
         }
-        
 
         private void HistoryRadios_Unloaded(object sender, RoutedEventArgs e)
         {
             _settings.PropertyChanged -= _settings_PropertyChanged;
-            //   GC.Collect();
         }
 
         private void _settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -81,7 +77,6 @@ namespace QingtingRadio
             }
             RingCircle.IsActive = false;
         }
-
 
         private async void HistoryRadiosView_ItemClick(object sender, ItemClickEventArgs e)
         {                                  

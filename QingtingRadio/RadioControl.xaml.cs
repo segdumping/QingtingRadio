@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using QingtingRadio.DataModels;
 using QingtingRadio.Tools;
 using QingtingRadio.ViewModels;
@@ -10,8 +10,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 using System.Collections.Generic;
 using System.Windows.Input;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {

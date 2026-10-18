@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -15,8 +15,6 @@ using QingtingRadio.DataModels;
 using QingtingRadio.Services;
 using QingtingRadio.Tools;
 using QingtingRadio.ViewModels;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {
@@ -248,7 +246,6 @@ namespace QingtingRadio
         {
             await RadioPlayViewModel.Instance.TogglePlayPauseAsync();
         }
-
 
         private async void InitPlayerPanel()
         {

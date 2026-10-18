@@ -70,11 +70,6 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0" >
                                 <Grid Height="68" Width="72">
-                                    <!--<Ellipse Stroke="{ThemeResource SystemAccentColorLight2}" 
-                                             Height="68" 
-                                             Width="72" 
-                                             StrokeThickness="2">
-                                    </Ellipse>-->
                                     <controls:RadialProgressBar
                                             x:Name="RadialProgressBarControl"
                                             Value="{Binding DataContext.Progress,RelativeSource={RelativeSource TemplatedParent}}"

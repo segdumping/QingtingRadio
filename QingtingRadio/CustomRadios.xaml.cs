@@ -1,4 +1,4 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Extensions;
+using Microsoft.Toolkit.Uwp.UI.Extensions;
 using QingtingRadio.DataModels;
 using QingtingRadio.Tools;
 using QingtingRadio.ViewModels;
@@ -15,8 +15,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace QingtingRadio
 {
     public sealed partial class CustomRadios : Page
@@ -30,7 +28,6 @@ namespace QingtingRadio
             RadioSingleProperty.Current.PropertyChanged += Current_PropertyChanged;
             this.Unloaded += CustomRadios_Unloaded;
             CustomRadiosView.ItemsSource = items = new ObservableCollection<CustomRadio>();
-         //   NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         private void CustomRadios_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -76,10 +73,7 @@ namespace QingtingRadio
         {
             base.OnNavigatedTo(e);
             object[] parameters = e.Parameter as object[];
-         //   if (e.NavigationMode == NavigationMode.New)
-            {
-                LoadCustomRadios();
-            }
+            LoadCustomRadios();
 
             TitleName.Text = parameters[0].ToString();
             

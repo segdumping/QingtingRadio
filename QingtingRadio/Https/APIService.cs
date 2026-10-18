@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -94,7 +94,6 @@ namespace QingtingRadio.Https
             }
         }
 
-
         public async Task<List<MusicItem>> GetSearchResult(string Uri)
         {
             if (!NetworkManager.IsNetConnected())
@@ -145,7 +144,6 @@ namespace QingtingRadio.Https
                     else
                     { }
                 }
-
 
                 return searchResults;
             }

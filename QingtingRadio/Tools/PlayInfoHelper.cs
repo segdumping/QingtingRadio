@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Https;
 using QingtingRadio.ViewModels;
 using System;
@@ -36,7 +36,6 @@ namespace QingtingRadio.Tools
             try
             {
                 List<ReplayRadio> list = await CurrentPlaybill(RadioId);
-
 
                 if (list != null)
                 {
@@ -84,18 +83,6 @@ namespace QingtingRadio.Tools
                 {
                     return string.Empty;
                 }
-                //DateTime timeStamp = new DateTime(1970, 1, 1);
-                //long unixTime = (DateTime.UtcNow.Ticks - timeStamp.Ticks) / 10000000;
-                //string uri = string.Format(ServiceURLs.LivePlaying, RadioId, unixTime.ToString());
-                //Dictionary<string, string> playing = await _api.GetLiveChannelPlaying(uri);
-                //if(playing != null)
-                //{
-                //    return playing[RadioId];
-                //}
-                //else
-                //{
-                //    return string.Empty;
-                //}
             }
             catch(Exception ex)
             {

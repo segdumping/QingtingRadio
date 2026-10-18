@@ -1,10 +1,9 @@
-﻿using QingtingRadio.Tools;
+using QingtingRadio.Tools;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Storage.Streams;
-
 
 namespace QingtingRadio.Https
 {

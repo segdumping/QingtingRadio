@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,7 +92,6 @@ namespace QingtingRadio.ViewModels
                 }
             }
         }
-
 
         private async Task<List<AlbumItem>> LoadMoreAlbumitem(int pageSize = 60)
         {
@@ -281,7 +280,6 @@ namespace QingtingRadio.ViewModels
             CanSkipPrevious = canSkip;
         }
 
-
         private async Task CurrentPlayAlbumChanged()
         {
             int insertIndex = 0;
@@ -308,7 +306,6 @@ namespace QingtingRadio.ViewModels
 
                 StorageFolder files = await FileHelper.GetAudioCacheFolderAsync();
 
-
                 for (;;)
                 {
                     // 取数据期间换台清空了列表：本轮的插入目标已失效，直接放弃
@@ -324,7 +321,6 @@ namespace QingtingRadio.ViewModels
                     List<AlbumItem> list = await LoadMoreAlbumitem();
                     // 空列表视为分页取尽，避免目标条目不存在时无限翻页
                     if (list == null || list.Count == 0) break;
-
 
                     foreach (var c in list)
                     {
@@ -426,7 +422,6 @@ namespace QingtingRadio.ViewModels
                     isExist = true;
                 }
             }
-
 
             if (isExist && files != null)
             {

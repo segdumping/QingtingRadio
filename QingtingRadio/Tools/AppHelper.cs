@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Services;
 using QingtingRadio.ViewModels;
 using System;
@@ -19,12 +19,10 @@ namespace QingtingRadio.Tools
         private Timer _autoStopTimer;
         private RadioSettingsViewModel _settings = RadioSettingsViewModel.Instance;
 
-
         public void AppEnteredHandle()
         {
             try
             {
-            //    DeleteINetCache();
                 _ = SavePlayPosition();
             }
             catch(Exception ex)
@@ -55,13 +53,6 @@ namespace QingtingRadio.Tools
                 LogManager.LogAsync("register toast", ex);
             }
         }
-
-        //public async void DeleteINetCache()
-        //{
-        // //   await FileHelper.Current.CleanINetCache();
-        //}
-
-
 
         private async Task CheckReview()
         {
@@ -112,7 +103,6 @@ namespace QingtingRadio.Tools
                 LogManager.LogAsync("save play position", ex);
             }
         }
-
 
 #region 网络检查并通知用户
         public void CheckNetwork(string message)
@@ -346,7 +336,6 @@ namespace QingtingRadio.Tools
 
             return w - offset;
         }
-
 
         private AppHelper() { }
         public static readonly AppHelper Current = new AppHelper();

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.ApplicationModel.Background;
 using Windows.Security.Cryptography.Core;
@@ -13,7 +13,6 @@ namespace QingtingRadio.ViewModels
     {
         private bool _hasCustomRadio;
         private Visibility _panelVisibility;
-
 
         public Visibility PanelVisibility
         {

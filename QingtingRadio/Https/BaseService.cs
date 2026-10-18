@@ -47,8 +47,6 @@ namespace QingtingRadio.Https
         /// <summary>
         /// 向服务器发送get请求  返回服务器回复数据(string)
         /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
         public async static Task<string> SendGetRequest(string url)
         {
             try
@@ -74,8 +72,6 @@ namespace QingtingRadio.Https
         /// <summary>
         /// 向服务器发送get请求  返回服务器回复数据(bytes)
         /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
         public async static Task<IBuffer> SendGetRequestAsBytes(string url)
         {
             try
@@ -101,9 +97,6 @@ namespace QingtingRadio.Https
         /// <summary>
         /// 向服务器发送post请求 返回服务器回复数据(string)
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="body"></param>
-        /// <returns></returns>
         public async static Task<string> SendPostRequest(string url, string body)
         {
             try

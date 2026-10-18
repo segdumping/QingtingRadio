@@ -1,12 +1,10 @@
-﻿using QingtingRadio.Services;
+using QingtingRadio.Services;
 using QingtingRadio.ViewModels;
 using System.ComponentModel;
 using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {

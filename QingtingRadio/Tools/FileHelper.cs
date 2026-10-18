@@ -129,7 +129,6 @@ namespace QingtingRadio.Tools
                 if (folder != null)
                 {
                     IReadOnlyCollection<StorageFile> files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
-                    //files.ToList().ForEach(async (f) => await f.DeleteAsync(StorageDeleteOption.PermanentDelete));
                     List<IAsyncAction> list = new List<IAsyncAction>();
                     foreach (var f in files)
                     {

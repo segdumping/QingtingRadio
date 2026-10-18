@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -18,9 +18,6 @@ using Microsoft.Toolkit.Uwp.UI.Extensions;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Windows.UI.ViewManagement;
-
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {
@@ -183,7 +180,6 @@ namespace QingtingRadio
 
                 string toast = await VersionUpdateHelper.Current.VersionLog(false);
                 if (string.IsNullOrEmpty(toast)) return;
-
 
                 TextBlock text = new TextBlock()
                 {

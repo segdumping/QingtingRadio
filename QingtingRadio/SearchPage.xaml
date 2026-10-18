@@ -278,36 +278,6 @@
             </ListView>
         </pr:PullToRefreshBox>
         <Grid Name="SearchHistory" Grid.Row="2">
-            <!--<Grid Name="HotSearchWords">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" MinHeight="24" Orientation="Horizontal" >
-                    <TextBlock Text="热门搜索" VerticalAlignment="Bottom" Margin="20,0,0,0" Foreground="{ThemeResource SystemAccentColor}"/>
-                </StackPanel>
-                <ListView Name="HotWords"
-                          Grid.Row="1"
-                          CanReorderItems="False"
-                          CanDragItems="False"              
-                          IsItemClickEnabled="True"
-                          SelectionMode="None"
-                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                          ItemClick="HistoryWords_ItemClick"
-                          Style="{StaticResource RadioItemListStyle}"
-                          ItemsSource="{Binding}">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <wrapPanel:WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="x:String">
-                            <TextBlock Text="{text:Binding}" Margin="2,0" TextTrimming="WordEllipsis"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Grid>-->
             <Grid Name="HistorySearchWords">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>

@@ -1,4 +1,4 @@
-﻿using QingtingRadio.DataModels;
+using QingtingRadio.DataModels;
 using QingtingRadio.Tools;
 using QingtingRadio.ViewModels;
 using System;
@@ -9,8 +9,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace QingtingRadio
 {
@@ -67,18 +65,7 @@ namespace QingtingRadio
                 item.PlayUri = file.FileUri;
                 item.FileName = file.FileName;
 
-                try
-                {
-                    //item.Date = file.d
-                    //item.StartTime = tmp.ElementAt(3).ToString();
-                    //item.EndTime = tmp.ElementAt(4).ToString();
-                }
-                catch(Exception ex)
-                {
-                    LogManager.LogAsync("downloadlists view item click", ex);
-                }
-                              
-                await RadioPlayViewModel.Instance.PlayDownloadItem(item);                         
+                await RadioPlayViewModel.Instance.PlayDownloadItem(item);
             }
             else
             {
