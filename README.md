@@ -18,6 +18,16 @@
 - 🌗 **主题自动切换**：按设定时段在深浅主题间定时切换
 - 🔈 **系统集成**：SMTC 系统媒体控制（锁屏 / 媒体浮窗）与后台播放
 
+## 📷 界面预览
+
+| 首页 · 推荐 | 首页 · 深色主题 |
+| :---: | :---: |
+| ![首页](docs/screenshots/home.png) | ![深色主题](docs/screenshots/home-dark.png) |
+| **搜索** | **收藏** |
+| ![搜索](docs/screenshots/search.png) | ![收藏](docs/screenshots/favorites.png) |
+| **收听历史** | **下载** |
+| ![历史](docs/screenshots/history.png) | ![下载](docs/screenshots/downloads.png) |
+
 ## 🛠️ 环境要求
 
 | 项目 | 要求 |
