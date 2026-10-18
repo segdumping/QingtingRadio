@@ -32,7 +32,6 @@ namespace QingtingRadio.ViewModels
                 if (!string.IsNullOrEmpty(itemId))
                 {
                     string Uri = string.Format(ServiceURLs.ReplayList, itemId, currentDay.Item1);
-                    // 直接使用 AddDays 计算的目标日期，避免跨月/跨年时用当前年月拼出错误日期
                     DateTime dt = PlayInfoHelper.Current.GetTargetDate(ValueType);
                     list = await _api.GetReplayList(Uri, dt.ToString("yyyy-MM-dd"));
                 }             

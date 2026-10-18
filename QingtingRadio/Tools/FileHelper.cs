@@ -24,10 +24,7 @@ namespace QingtingRadio.Tools
             AudioCache = 1,
         }
 
-        private Windows.Storage.StorageFolder _local_folder;
-        // 串行化 DatasCache 下 JSON 的读写：
-        // 1) 下载进度等高频写入并发执行时避免互相覆盖；
-        // 2) 防止"写替换(MoveAndReplace)期间正好有读打开文件"导致读失败/写失败
+        private Windows.Storage.StorageFolder _local_folder; 
         private static readonly SemaphoreSlim _ioLock = new SemaphoreSlim(1, 1);
 
         private FileHelper()
@@ -71,10 +68,6 @@ namespace QingtingRadio.Tools
             try
             {
                 var folder = await _local_folder.CreateFolderAsync("DatasCache", CreationCollisionOption.OpenIfExists);
-
-                // 文件不存在是正常情况（首次运行/尚未产生过数据）：直接返回 null。
-                // 之前靠 FileNotFoundException 来表达"没有数据"，调试器会在每次无文件读取时中断，
-                // 日志里也全是异常噪音。
                 StorageFile file = await folder.TryGetItemAsync(filename) as StorageFile;
                 if (file == null)
                 {
@@ -102,7 +95,7 @@ namespace QingtingRadio.Tools
         }
 
         /// <summary>
-        /// 保存图片的原始压缩字节。相比"解码成 WriteableBitmap 再重编码"，免去画质损失与 CPU 开销。
+        /// 保存图片的原始压缩字节
         /// </summary>
         public async Task SaveImageBytesAsync(byte[] bytes, string filename)
         {
@@ -154,10 +147,7 @@ namespace QingtingRadio.Tools
         }
 
         /// <summary>
-        /// 把用户/接口给的字符串清洗成可用的文件名片段：
-        /// 去掉 Windows 文件名非法字符与控制字符，并去掉首尾空白与结尾的点。
-        /// 下载落盘、本地缓存查找、播放时拼文件名必须共用这一个方法，否则会两处拼出不同名字、缓存查不中。
-        /// </summary>
+        /// 把符串清洗成可用的文件名片段
         public static string SanitizeFileName(string name)
         {
             if (string.IsNullOrEmpty(name)) return name;
@@ -199,8 +189,7 @@ namespace QingtingRadio.Tools
         }
 
         /// <summary>
-        /// 解析音乐库下的 QingtingRadio 音频缓存目录；无音乐库权限或目录不存在时返回 null。
-        /// 全项目统一从这里取，避免各处自行 TryGetItemAsync 再 as 的重复模式。
+        /// 解析音乐库下的音频缓存目录
         /// </summary>
         public static async Task<StorageFolder> GetAudioCacheFolderAsync()
         {

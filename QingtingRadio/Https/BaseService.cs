@@ -9,27 +9,21 @@ using Windows.Web.Http;
 namespace QingtingRadio.Https
 {
     /// <summary>
-    /// HTTP 请求基类：带超时与统一 UA 的 GET/POST；失败记录原因与日志并返回 null。
+    /// HTTP 请求基类：带超时与统一 UA 的 GET/POST
     /// </summary>
     static class BaseService
     {
         private static readonly HttpClient _httpClient = new HttpClient();
         private const string UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36 Edg/80.0.361.111";
 
-        // Windows.Web.Http.HttpClient 没有 Timeout 属性，用每请求 CancellationTokenSource 实现超时
+        // Windows.Web.Http.HttpClient 没有 Timeout 属性，用 CancellationTokenSource 实现超时
         private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(15);
 
         static BaseService()
         {
-            // UA 只设置一次。此前每个请求都 Clear()/Add() 共享的 DefaultRequestHeaders，
-            // 并发请求会互相清头甚至抛异常。
             _httpClient.DefaultRequestHeaders.TryAppendWithoutValidation("User-Agent", UserAgent);
         }
 
-        /// <summary>
-        /// 最近一次请求失败的原因（状态码或异常消息），供调用方诊断"为什么拿到 null"。
-        /// 所有失败同时会写入日志。
-        /// </summary>
         public static string LastError { get; private set; }
 
         private static void RecordError(string url, string message)
@@ -47,9 +41,6 @@ namespace QingtingRadio.Https
             }
         }
 
-        /// <summary>
-        /// 向服务器发送get请求  返回服务器回复数据(string)
-        /// </summary>
         public async static Task<string> SendGetRequest(string url)
         {
             try
@@ -72,9 +63,7 @@ namespace QingtingRadio.Https
                 return null;
             }
         }
-        /// <summary>
-        /// 向服务器发送get请求  返回服务器回复数据(bytes)
-        /// </summary>
+     
         public async static Task<IBuffer> SendGetRequestAsBytes(string url)
         {
             try
@@ -97,9 +86,7 @@ namespace QingtingRadio.Https
                 return null;
             }
         }
-        /// <summary>
-        /// 向服务器发送post请求 返回服务器回复数据(string)
-        /// </summary>
+     
         public async static Task<string> SendPostRequest(string url, string body)
         {
             try

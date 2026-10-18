@@ -29,9 +29,7 @@ namespace QingtingRadio.Https
             return await BaseService.SendGetRequest(url);
         }
 
-        /// <summary>
-        /// 拉取图片原始压缩字节；不做解码，由调用方直接落盘，避免重编码的画质损失与 CPU 开销。
-        /// </summary>
+        // 拉取图片
         protected async Task<IBuffer> GetImageBytes(string url)
         {
             try

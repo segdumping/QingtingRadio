@@ -34,8 +34,6 @@ namespace QingtingRadio.Tools
                 {
                     JsonObject jo = jsonItem.GetObject();
                     string regionName = jo["title"].GetString();
-                    // 接口返回的 cname（如"北京"）与区域名（如"北京市"）不一定完全一致，双向包含判断；
-                    // 之前每轮都把 RegionName 写进结果对象且只做单向 Contains，实际几乎匹配不到
                     if (UserLocation.Contains(regionName) || regionName.Contains(UserLocation))
                     {
                         tmp.RegionName = regionName;
@@ -54,7 +52,6 @@ namespace QingtingRadio.Tools
             }
             catch (Exception ex)
             {
-                // 调用方是 async void（HomePage），这里漏异常会直接崩溃应用。
                 LogManager.LogAsync("get user location", ex);
                 return null;
             }

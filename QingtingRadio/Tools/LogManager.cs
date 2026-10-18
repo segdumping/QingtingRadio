@@ -12,8 +12,7 @@ namespace QingtingRadio.Tools
     /// </summary>
     public class LogManager
     {
-        // 用 SemaphoreSlim 而不是 Monitor：await 之后的续体可能换线程执行，
-        // Monitor.Exit 会因跨线程释放抛 SynchronizationLockException 并导致锁永久丢失、日志静默停写。
+        // 写日志串行化：await 续体可能换线程，Monitor 会因跨线程释放而失败
         private static readonly SemaphoreSlim mutex = new SemaphoreSlim(1, 1);
 
         public static void LogAsync(string message, Exception ex)
@@ -38,7 +37,7 @@ namespace QingtingRadio.Tools
 
                     using (Stream fileStream = await folder.OpenStreamForWriteAsync("QingtingLog.txt", CreationCollisionOption.OpenIfExists))
                     {
-                        // 定位到文件末尾追加；不 Seek 会从 0 开始覆盖写，历史日志全部丢失
+                        // 定位到文件末尾追加
                         fileStream.Seek(0, SeekOrigin.End);
 
                         using (StreamWriter write = new StreamWriter(fileStream))
@@ -56,7 +55,6 @@ namespace QingtingRadio.Tools
                 }
                 catch (Exception)
                 {
-                    // 日志系统自身失败时静默，绝不能向外抛异常
                 }
                 finally
                 {

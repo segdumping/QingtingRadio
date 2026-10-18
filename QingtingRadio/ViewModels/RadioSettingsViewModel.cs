@@ -267,8 +267,6 @@ namespace QingtingRadio.ViewModels
         {
             get
             {
-                // 设备 ID 必须是稳定值：此前每次读取都随机替换字符，导致同一设备在不同请求里
-                // 上报不同 ID（缓存/统计/接口校验都会受影响）。首次生成后原样复用。
                 string tmp = ReadSettings<string>(nameof(DeviceId), null);
                 if (string.IsNullOrEmpty(tmp))
                 {

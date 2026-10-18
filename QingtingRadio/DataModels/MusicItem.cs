@@ -141,7 +141,6 @@ namespace QingtingRadio.DataModels
 
        public static string GetSign(string content)
        {
-            // 签名算法（含密钥）已移入私有程序集 QingtingRadio.Core
             return ApiSigner.GetSign(content);
        } 
 

@@ -121,9 +121,6 @@ namespace QingtingRadio.Https
 
                     if (type.Equals("program_ondemand"))
                     {
-                        // v3/search 的节目结果里既没有 file_path 也没有 mediainfo_id（旧代码用
-                        // file_path 过滤，导致所有节目搜索结果被静默丢弃）。播放地址由
-                        // parent_id(频道/专辑) + 节目 id 现算，因此这里只校验这两个必需字段。
                         string programId = MusicItem.GetJsonNumber(jo, "id");
                         string parentId = MusicItem.GetJsonNumber(jo, "parent_id");
                         if (string.IsNullOrEmpty(programId) || string.IsNullOrEmpty(parentId)) continue;

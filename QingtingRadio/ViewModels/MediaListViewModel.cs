@@ -26,13 +26,8 @@ namespace QingtingRadio.ViewModels
 
         private MediaPlaybackList _playbackList;
         private int _currentPage = 1;
-        // 保护 Items 增删/MoveTo 的互斥锁，替代原来"忙等自旋"的 _isBusy 标志
         private readonly SemaphoreSlim _listLock = new SemaphoreSlim(1, 1);
-        // 播放列表里为本地缓存文件打开的流，必须在列表整体清空时统一释放，否则句柄越积越多
         private readonly List<IRandomAccessStream> _openedStreams = new List<IRandomAccessStream>();
-        // 列表"代次"：ClearPlaybackList 每清空一次就自增。
-        // 分页加载（AppendLoad/CurrentPlayAlbumChanged）会跨 await，换台清空后如果继续按旧代次插入，
-        // 就会把上一档节目的条目混进新列表，这里用代次比对来作废过期的插入。
         private int _listGeneration;
         bool _canSkipNext;
         bool _canSkipPrevious;
@@ -116,8 +111,7 @@ namespace QingtingRadio.ViewModels
         }
 
         /// <summary>
-        /// 判断给定节目是否已在播放列表内；已在则直接切到该条目并开始播放。
-        /// 返回 false 表示"不在列表里"，由调用方决定重新入列播放。
+        /// 判断给定节目是否已在播放列表内
         /// </summary>
         public async Task<bool> IsPlayListItem(string mediaId, string albumId)
         {
@@ -143,13 +137,13 @@ namespace QingtingRadio.ViewModels
 
             int generation = _listGeneration;
             List<AlbumItem> list = await LoadMoreAlbumitem();
-            // 空列表说明分页已取尽：必须视为终止，否则调用方会无限翻页、无限打接口
+            // 空列表说明分页已取尽
             if (list == null || list.Count == 0) return false;
 
             await _listLock.WaitAsync();
             try
             {
-                // 取数据期间换台把列表清空了：这批数据已过期，不能追加
+                // 取数据期间换台把列表清空
                 if (generation != _listGeneration) return false;
 
                 StorageFolder files = await FileHelper.GetAudioCacheFolderAsync();
@@ -196,10 +190,7 @@ namespace QingtingRadio.ViewModels
         }
 
         /// <summary>
-        /// 释放旧播放列表关联的本地文件流。
-        /// 必须等媒体引擎"确实开始播放新内容"之后再释放：释放一个仍被 MediaPlayer 引用的流，
-        /// 会让媒体管线访问已关闭的文件，属于进程级崩溃风险。
-        /// 限定时间内没有确认新内容开播，就直接放弃释放（宁可句柄延迟回收，也不再冒险）。
+        /// 释放旧播放列表关联的本地文件流
         /// </summary>
         private async Task DisposeStreamsWhenSafeAsync(IRandomAccessStream[] streams)
         {
@@ -219,7 +210,6 @@ namespace QingtingRadio.ViewModels
                 return;
             }
 
-            // 已确认在新内容上播放，再留几秒缓冲时间，消除媒体引擎可能残留的引用
             await Task.Delay(TimeSpan.FromSeconds(3));
 
             foreach (var stream in streams)
@@ -256,10 +246,7 @@ namespace QingtingRadio.ViewModels
                 case MusicItem.AudioType.Program:
                 case MusicItem.AudioType.Album:
                     {
-                        // 没有专辑上下文时不能直接 return：那会把 CanSkip 永久留在 false，
-                        // 导致明明有播放列表，上一曲/下一曲按钮却一直是禁用的。这里改为去按实际列表长度决定。
                         if (albumId == null) break;
-                        // 节目总数解析失败时视为"列表已完整"，不做整表重建
                         int programCount = 0;
                         int.TryParse(_albumInfo?.PragromCount, out programCount);
                         if (_albumInfo == null || (_albumInfo != null && albumId != _albumInfo.Id) ||
@@ -275,8 +262,7 @@ namespace QingtingRadio.ViewModels
                     break;
             }
 
-            // 统一按实际播放列表恢复上一曲/下一曲可用状态：
-            // 只有节目/专辑这种有列表的点播才可切曲，直播/回听固定禁用。
+            // 统一按实际播放列表恢复上一曲/下一曲可用状态
             bool canSkip = (playType == MusicItem.AudioType.Program || playType == MusicItem.AudioType.Album)
                 && _playbackList.Items.Count > 1;
             CanSkipNext = canSkip;
@@ -292,9 +278,6 @@ namespace QingtingRadio.ViewModels
             try
             {
                 int generation = _listGeneration;
-
-                // 已经在列表里的条目（按 mediaId）。同一专辑分页没取满时会再次走到这里，
-                // 若不去重，就会把第一页的节目重复插入到列表头部。
                 HashSet<string> existingIds = new HashSet<string>();
                 foreach (MediaPlaybackItem existed in _playbackList.Items)
                 {
@@ -485,7 +468,7 @@ namespace QingtingRadio.ViewModels
                     return true;
                 }
 
-                // 没找到就继续翻页；AppendLoad 返回 false（取尽/网络失败）即停止，交由调用方决定是否另行播放
+                // 没找到就继续翻页
                 bool hasMore = await AppendLoad();
                 if (!hasMore)
                 {

@@ -155,7 +155,6 @@ namespace QingtingRadio.Tools
 
         /// <summary>
         /// 页签对应的目标日期：0=今天 1=昨天 2=前天。
-        /// 统一用 DateTime.AddDays 计算，跨月/跨年（如 1 月 1-2 日）不会再取到 0 月而抛异常。
         /// </summary>
         public DateTime GetTargetDate(int ValueType)
         {

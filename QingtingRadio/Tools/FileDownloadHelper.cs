@@ -20,11 +20,8 @@ namespace QingtingRadio.Tools
     {
         private CancellationTokenSource cts;
         private List<DownloadOperation> activeDownloads;
-        // 每个后台传输单独的取消令牌：DownloadOperation 本身没有 Cancel()，
-        // 取消要通过 StartAsync()/AttachAsync() 返回的异步操作来触发（见 HandleDownloadAsync）。
         private readonly Dictionary<Guid, CancellationTokenSource> downloadTokens = new Dictionary<Guid, CancellationTokenSource>();
         private ObservableCollection<DownloadItem> downloadFiles;
-        // 上次落盘时间戳：进度回调频率极高，写盘按节流 + 关键节点强制落盘
         private long _lastPersistTicks;
 
         public event DataLoadingEventHandler DataLoading;
@@ -126,8 +123,7 @@ namespace QingtingRadio.Tools
                 return;
             }
 
-            // 兜底清洗文件名：调用方可能带入 Windows 不允许的字符，CreateFileAsync 会直接抛异常，
-            // 下载表面上看是"点了没反应"。这里就地改写，保证落盘名与列表记录、后续查找用的是同一个名字。
+            // 兜底清洗文件名：调用方可能带入 Windows 不允许的字符，CreateFileAsync 会直接抛异常
             downloadItem.FileName = FileHelper.SanitizeFileName(downloadItem.FileName);
             if (string.IsNullOrEmpty(downloadItem.FileName))
             {
@@ -246,7 +242,7 @@ namespace QingtingRadio.Tools
         }
 
         /// <summary>
-        /// 下载失败后清掉半成品文件：否则它会一直占空间，还会让"文件已存在"的判断失真。
+        /// 下载失败后清掉半成品文件 
         /// </summary>
         private async Task DeletePartialFileAsync(DownloadOperation download)
         {
@@ -267,7 +263,6 @@ namespace QingtingRadio.Tools
 
         private async void DownloadProgress(DownloadOperation download)
         {
-            // Progress<T> 回调要求 Action 签名，只能保持 async void，必须自带异常保护
             try
             {
                 BackgroundDownloadProgress currentProgress = download.Progress;
@@ -303,9 +298,7 @@ namespace QingtingRadio.Tools
                         DownloadOperation currentOperation = activeDownloads.ElementAt(index);
                         try
                         {
-                            // 必须真正取消而不是 Pause：Pause 只是挂起，后台传输仍活着并占着目标文件，
-                            // 紧接着删文件会因文件被占用而失败（表现为"删了还在"）。
-                            // DownloadOperation 没有 Cancel()，要取消承载它的异步操作。
+                            // 必须真正取消而不是 Pause
                             CancellationTokenSource downloadCts;
                             lock (downloadTokens)
                             {
@@ -351,7 +344,7 @@ namespace QingtingRadio.Tools
                     return false;
                 }
 
-                // 没在列表里匹配到条目时（例如顺手清理残留文件），退回用传入的文件名
+                // 没在列表里匹配到条目时， 用传入的文件名
                 if (string.IsNullOrEmpty(filename))
                 {
                     filename = file.FileName;
@@ -365,7 +358,6 @@ namespace QingtingRadio.Tools
                 StorageFile radioFile = await radioFolder.TryGetItemAsync(filename) as StorageFile;
                 if (radioFile == null)
                 {
-                    // 文件本来就不存在：内存与持久化列表都已移除，视为删除成功
                     return true;
                 }
 
@@ -395,8 +387,6 @@ namespace QingtingRadio.Tools
 
                 return false;
             }
-
-            return true;
         }
 
         private async Task SyncDownloadMemoryCache(DownloadOperation download, bool isSuccess)
@@ -456,7 +446,7 @@ namespace QingtingRadio.Tools
         }
 
         /// <summary>
-        /// 把下载列表持久化到 JSON。进度回调按 500ms 节流；完成/暂停/失败等关键节点传入 force 立即落盘。
+        /// 把下载列表持久化到 JSON   
         /// </summary>
         private async Task SaveCacheToDownloadFile(bool force = false)
         {

@@ -93,8 +93,6 @@ namespace QingtingRadio.ViewModels
                 }
                 else
                 {
-                    // 缓存键必须与 DownloadImage 的落盘名一致：去掉 CDN 的 "!n" 尺寸后缀，
-                    // 否则带后缀的地址永远查不到缓存、每次进页面都重新下载
                     string[] sArray = tmp.ImageUri.Split('/');
                     string lastSegment = sArray[sArray.Length - 1];
                     string ImageId = lastSegment.Split('!')[0];
@@ -105,7 +103,6 @@ namespace QingtingRadio.ViewModels
                     }
                     else
                     {
-                        // 已带尺寸后缀的不再拼接，避免出现 "...!200!200"
                         if (!lastSegment.Contains("!"))
                         {
                             tmp.ImageUri = tmp.ImageUri + "!200";
